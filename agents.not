@@ -1,0 +1,10 @@
+# Najlepsze praktyki dla playwright
+
+## Struktura projektu
+ - Testy są zapisyawne w folderze test oraz podfolderze z nazwą testu
+ - przypadki testowe zapisuj w podfolderze z nazwą testu j formacie markdown i w języku polskim
+ - w folderze helpers zapisuj wszystkie funkcje, które można ponownie wykożystać w testach
+ - w folderze generators zapisuj funkcje pomocnicze np. generatory danych, daty
+
+
+## Kod testów

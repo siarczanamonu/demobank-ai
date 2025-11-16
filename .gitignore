@@ -1,0 +1,22 @@
+node_modules/
+playwright-report/
+test-results/
+/.venv
+dist/
+.DS_Store
+.idea/
+.vscode/
+coverage/
+package-lock.json
+npm-debug.log
+/.npm
+auth.json
+.github/chatmodes
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
