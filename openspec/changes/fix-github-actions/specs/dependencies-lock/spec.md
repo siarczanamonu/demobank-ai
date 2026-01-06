@@ -49,13 +49,13 @@ The workflow configuration in `.github/workflows/ci.yml` already uses `cache: 'n
 
 ## MODIFIED Requirements
 
-None. This is a new spec with no previously existing requirements.
+There SHALL be no modified requirements. This is a new spec with no previously existing requirements.
 
 ---
 
 ## REMOVED Requirements
 
-None. This is a new spec with no previously existing requirements.
+There SHALL be no removed requirements. This is a new spec with no previously existing requirements.
 
 ---
 
