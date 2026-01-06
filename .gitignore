@@ -7,7 +7,6 @@ dist/
 .idea/
 .vscode/
 coverage/
-package-lock.json
 npm-debug.log
 /.npm
 auth.json
