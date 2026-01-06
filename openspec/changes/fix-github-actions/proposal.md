@@ -37,14 +37,14 @@ The GitHub Actions workflow (`ci.yml`) cannot run successfully because the npm d
 ## Proposed Solution
 
 **Phase 1: Add Lock File to Repository**
-- Commit `package-lock.json` to git repository
-- Ensure lock file reflects current dependency state (pinned versions)
-- Document lock file as required for reproducible builds
+- The `package-lock.json` file SHALL be committed to git repository
+- The lock file SHALL reflect current dependency state (pinned versions)
+- Documentation of lock file SHALL be provided for reproducible builds
 
 **Phase 2: Verify Workflow Configuration**
-- Confirm `ci.yml` properly configures npm caching
-- Test workflow execution in CI environment
-- Verify all CI steps complete successfully (lint, typecheck, tests)
+- The `ci.yml` workflow configuration SHALL be confirmed to properly configure npm caching
+- Workflow execution SHALL be tested in CI environment
+- All CI steps SHALL complete successfully (lint, typecheck, tests)
 
 ## Scope
 
