@@ -10,21 +10,20 @@
 The `package-lock.json` file SHALL be added to git tracking, ensuring exact dependency versions are reproducible across all environments (local development, CI/CD, team members).
 
 #### Scenario: GitHub Actions can locate package-lock.json
-- When GitHub Actions workflow starts, it checks for lock file in repository root
-- Lock file exists at path: `package-lock.json`
-- GitHub Actions `setup-node@v4` with `cache: 'npm'` successfully finds the file
-- npm caching layer can be populated from lock file
+- GitHub Actions workflow SHALL start and check for lock file in repository root
+- The lock file SHALL exist at path: `package-lock.json`
+- GitHub Actions `setup-node@v4` with `cache: 'npm'` SHALL successfully find the file
+- The npm caching layer SHALL be populated from lock file
 
 #### Scenario: npm ci installs exact versions from lock file
-- CI workflow runs `npm ci` (clean install)
-- npm uses `package-lock.json` to install exact pinned versions
-- No dependency resolution happens (deterministic)
-- Installation succeeds without warnings or version conflicts
+- When CI workflow runs `npm ci` (clean install), it SHALL use `package-lock.json` to install exact pinned versions
+- No dependency resolution SHALL happen (deterministic installation)
+- Installation SHALL succeed without warnings or version conflicts
 
 #### Scenario: Lock file reflects current project dependencies
-- File contains all dependencies from `package.json` (playwright, eslint, typescript, etc.)
-- All transitive dependencies are pinned to specific versions
-- Integrity checksums for each package are included
+- File SHALL contain all dependencies from `package.json` (playwright, eslint, typescript, etc.)
+- All transitive dependencies SHALL be pinned to specific versions
+- Integrity checksums for each package SHALL be included
 
 ---
 
@@ -36,14 +35,14 @@ The `package-lock.json` file SHALL be added to git tracking, ensuring exact depe
 The workflow configuration in `.github/workflows/ci.yml` already uses `cache: 'npm'`. With the lock file committed to the repository, this caching layer SHALL function correctly to improve CI performance and ensure deterministic builds.
 
 #### Scenario: npm cache is populated on first run
-- First CI run: lock file exists, npm downloads and caches dependencies
-- Cache is stored in GitHub Actions cache storage
-- Subsequent runs benefit from cache hits (faster builds)
+- First CI run: lock file SHALL exist, npm SHALL download and cache dependencies
+- Cache SHALL be stored in GitHub Actions cache storage
+- Subsequent runs SHALL benefit from cache hits (faster builds)
 
 #### Scenario: Cache is invalidated when lock file changes
-- If `package-lock.json` changes (dependency update), cache key is updated
-- New dependencies are fetched and cached
-- Old cache entries are discarded
+- If `package-lock.json` changes (dependency update), cache key SHALL be updated
+- New dependencies SHALL be fetched and cached
+- Old cache entries SHALL be discarded
 
 ---
 
