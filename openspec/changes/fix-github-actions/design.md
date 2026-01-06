@@ -107,24 +107,24 @@ demobank-ai/
 ## Implementation Sequence
 
 1. **Verify lock file state locally**
-   - Ensure `package-lock.json` reflects current `package.json`
-   - Run `npm ci` to verify lock file integrity
+   - The `package-lock.json` file SHALL be verified to reflect current `package.json`
+   - The `npm ci` command SHALL be run to verify lock file integrity
 
 2. **Add to git tracking**
-   - Remove from `.gitignore` if present
-   - Stage `package-lock.json`
-   - Commit with message "ci: add npm dependency lock file"
+   - The `.gitignore` file SHALL be modified to remove any exclusion of `package-lock.json` if present
+   - The `package-lock.json` file SHALL be staged for commit
+   - A commit with message "ci: add npm dependency lock file" SHALL be created
 
 3. **Push and verify CI**
-   - Push changes to `origin`
-   - Trigger GitHub Actions workflow
-   - Verify all steps complete (lint, typecheck, tests)
-   - Check cache logs in workflow output
+   - Changes SHALL be pushed to `origin`
+   - GitHub Actions workflow SHALL be triggered
+   - All CI steps (lint, typecheck, tests) SHALL complete successfully
+   - Cache logs in workflow output SHALL be verified
 
 4. **Document for team**
-   - Update README or CONTRIBUTING.md
-   - Clarify: use `npm ci` locally, not `npm install`
-   - Explain lock file purpose and git workflow
+   - README or CONTRIBUTING.md SHALL be updated
+   - Team SHALL be clarified: use `npm ci` locally, not `npm install`
+   - The lock file purpose and git workflow SHALL be explained
 
 ## Comparison: Alternative Approaches
 
