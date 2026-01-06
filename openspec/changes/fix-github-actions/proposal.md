@@ -63,11 +63,11 @@ The GitHub Actions workflow (`ci.yml`) cannot run successfully because the npm d
 
 | Aspect | Before | After |
 |--------|--------|-------|
-| **CI Pipeline** | Fails on dependency caching | Runs successfully with cached deps |
-| **Build Reproducibility** | Inconsistent (varies by local env) | Consistent (pinned versions) |
-| **CI Performance** | Blocked | Fast with cache hits |
-| **Dependency Management** | Implicit (only package.json) | Explicit (with lock file) |
-| **Team Collaboration** | Uncertainty about exact versions | Guaranteed same versions for all |
+| **CI Pipeline** | Pipeline fails on dependency caching | Pipeline SHALL run successfully with cached deps |
+| **Build Reproducibility** | Builds are inconsistent (varies by local env) | Builds SHALL be consistent (pinned versions) |
+| **CI Performance** | Pipeline is blocked | Pipeline SHALL run fast with cache hits |
+| **Dependency Management** | Dependencies are implicit (only package.json) | Dependencies SHALL be explicit (with lock file) |
+| **Team Collaboration** | There is uncertainty about exact versions | Team SHALL have guaranteed same versions for all |
 
 ## Design Decisions
 
