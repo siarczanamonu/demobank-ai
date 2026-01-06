@@ -71,10 +71,10 @@ The GitHub Actions workflow (`ci.yml`) cannot run successfully because the npm d
 
 ## Design Decisions
 
-1. **Use npm lock file** (not yarn or pnpm) – aligns with current tooling in `package.json`
-2. **Commit lock file** (not gitignore) – required for reproducible CI builds
-3. **No dependency updates** – only committing existing lock file; upgrades handled separately
-4. **Standard GitHub Actions caching** – use built-in `cache: 'npm'` without custom configuration
+1. **Use npm lock file** – The project SHALL use npm lock file (not yarn or pnpm) to align with current tooling in `package.json`
+2. **Commit lock file** – The lock file SHALL be committed (not in gitignore) as it is required for reproducible CI builds
+3. **No dependency updates** – Only the existing lock file SHALL be committed; upgrades are handled separately
+4. **Standard GitHub Actions caching** – The project SHALL use built-in `cache: 'npm'` without custom configuration
 
 ## What Changes
 
