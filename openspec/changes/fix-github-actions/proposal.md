@@ -7,11 +7,11 @@
 
 ## Why
 
-The GitHub Actions CI/CD pipeline is currently failing with error: "Dependencies lock file is not found". The workflow file (`ci.yml`) configures npm caching and uses `npm ci` for deterministic dependency installation, but the `package-lock.json` file is not tracked in the git repository. This causes CI runs to fail whenever the workflow attempts to restore cached dependencies. Lock files are essential for reproducible builds and should be committed to the repository as best practice.
+The GitHub Actions CI/CD pipeline is currently failing with error: "Dependencies lock file is not found". This error SHALL be resolved by committing the `package-lock.json` file to the repository. The workflow file (`ci.yml`) configures npm caching and uses `npm ci` for deterministic dependency installation, but the `package-lock.json` file is not tracked in the git repository. This causes CI runs to fail whenever the workflow attempts to restore cached dependencies. Lock files SHALL be committed to the repository as best practice for reproducible builds.
 
 ## Summary
 
-The GitHub Actions workflow (`ci.yml`) cannot run successfully because the npm dependency lock file (`package-lock.json`) is missing from the repository, even though it exists locally. The workflow fails at the dependency installation step when it tries to use caching with `cache: 'npm'`. This prevents all CI/CD jobs (linting, type checking, tests) from executing. The fix involves committing the `package-lock.json` file to the repository and ensuring the workflow is properly configured to use cached dependencies.
+The GitHub Actions workflow (`ci.yml`) cannot run successfully because the npm dependency lock file (`package-lock.json`) is missing from the repository, even though it exists locally. The solution SHALL involve committing the `package-lock.json` file to the repository and ensuring the workflow is properly configured to use cached dependencies. The workflow fails at the dependency installation step when it tries to use caching with `cache: 'npm'`. This prevents all CI/CD jobs (linting, type checking, tests) from executing.
 
 ## Current State
 
@@ -49,10 +49,10 @@ The GitHub Actions workflow (`ci.yml`) cannot run successfully because the npm d
 ## Scope
 
 **Included**:
-- Add `package-lock.json` to git tracking
-- Verify workflow configuration in `ci.yml`
-- Test CI pipeline execution
-- Document dependency management best practices
+- The `package-lock.json` file SHALL be added to git tracking
+- Workflow configuration in `ci.yml` SHALL be verified
+- CI pipeline execution SHALL be tested
+- Dependency management best practices SHALL be documented
 
 **Not Included**:
 - Upgrading npm or Node.js versions (separate proposal if needed)
