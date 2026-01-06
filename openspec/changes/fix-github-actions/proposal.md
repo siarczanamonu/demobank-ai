@@ -79,10 +79,10 @@ The GitHub Actions workflow (`ci.yml`) cannot run successfully because the npm d
 ## What Changes
 
 ### Added
-- `package-lock.json` committed to repository (tracks exact dependency versions)
+- `package-lock.json` file SHALL be committed to repository to track exact dependency versions
 
 ### Modified
-- None (workflow configuration already correct)
+- `.gitignore` MAY be modified to remove any exclusion of `package-lock.json` if present (ensuring file is tracked)
 
 ### Removed
 - None
