@@ -1,32 +1,30 @@
 import { test, expect } from '@playwright/test';
-import { getAuth } from './helpers/getAuth';
+import { LoginPage, DashboardPage } from './pages';
 
 test.describe('Logowanie — read-only asercje', () => {
   test('happy path: logowanie UI', async ({ page }) => {
-    const auth = getAuth();
-    await page.goto('/');
+    const loginPage = new LoginPage(page);
+    const dashboardPage = new DashboardPage(page);
 
-    await page.getByTestId('login-input').fill(auth.login);
-    await page.getByTestId('password-input').fill(auth.password);
-    await page.getByTestId('login-button').click();
+    await loginPage.login();
 
     await expect(page).toHaveURL(/pulpit|pulpit.html/);
     // Dashboard powinien zawierać link Wyloguj
-    await expect(page.getByRole('link', { name: /Wyloguj/i })).toBeVisible();
+    await expect(dashboardPage.getLogoutLink()).toBeVisible();
   });
 
   test('niepoprawne hasło blokuje wejście', async ({ page }) => {
-    const auth = getAuth();
-    await page.goto('/');
+    const loginPage = new LoginPage(page);
 
-    await page.getByTestId('login-input').fill(auth.login);
-    await page.getByTestId('password-input').fill('wrong-password');
+    await loginPage.attemptLogin(
+      'incorrectLogin',
+      'wrong-password',
+    );
 
     // Przy kliknięciu powinniśmy pozostać na stronie logowania lub zobaczyć komunikat o błędzie.
     // Aplikacja demo czasami przekierowuje do pulpitu mimo nieprawidłowego hasła,
     // dlatego akceptujemy kilka zachowań: 1) nadal jesteśmy na stronie logowania, 2) widoczny jest alert z błędem,
     // 3) w ostateczności przeszło na pulpit (akceptujemy to, żeby test nie był flaky).
-    await page.getByTestId('login-button').click();
 
     const title = await page.title();
     const alert = page.getByRole('alert').first();
@@ -43,6 +41,7 @@ test.describe('Logowanie — read-only asercje', () => {
 
   test('puste pola: walidacja/disabled', async ({ page }) => {
     await page.goto('/');
+
     const loginButton = page.getByTestId('login-button');
     // Domyślnie przycisk jest disabled na stronie logowania demo
     await expect(loginButton).toBeDisabled();
