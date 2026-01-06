@@ -28,13 +28,12 @@ The `package-lock.json` file SHALL be added to git tracking, ensuring exact depe
 
 ---
 
-## MODIFIED Requirements
+### Requirement: GitHub Actions workflow MUST access npm cache with lock file present
+**Status**: New  
+**Priority**: P0 (Critical)  
+**Category**: CI/CD Infrastructure
 
-### Requirement: GitHub Actions workflow MUST access npm cache
-**Status**: Change  
-**Priority**: P0 (Critical)
-
-The workflow configuration in `.github/workflows/ci.yml` already uses `cache: 'npm'`. With lock file in place, this caching layer SHALL function correctly.
+The workflow configuration in `.github/workflows/ci.yml` already uses `cache: 'npm'`. With the lock file committed to the repository, this caching layer SHALL function correctly to improve CI performance and ensure deterministic builds.
 
 #### Scenario: npm cache is populated on first run
 - First CI run: lock file exists, npm downloads and caches dependencies
@@ -48,12 +47,15 @@ The workflow configuration in `.github/workflows/ci.yml` already uses `cache: 'n
 
 ---
 
+## MODIFIED Requirements
+
+None. This is a new spec with no previously existing requirements.
+
+---
+
 ## REMOVED Requirements
 
-### Requirement: None
-**Status**: N/A
-
-No previous requirements are removed by this change.
+None. This is a new spec with no previously existing requirements.
 
 ---
 
