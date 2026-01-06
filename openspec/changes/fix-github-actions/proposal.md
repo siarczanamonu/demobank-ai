@@ -16,11 +16,11 @@ The GitHub Actions workflow (`ci.yml`) cannot run successfully because the npm d
 ## Current State
 
 **CI/CD Configuration**:
-- Workflow file: `.github/workflows/ci.yml`
-- Workflow triggers: push to `main`/`master`, pull requests
-- Node version: 18.x
-- Dependency management: npm with caching enabled
-- Current steps: 
+- Workflow file SHALL be: `.github/workflows/ci.yml`
+- Workflow triggers SHALL include: push to `main`/`master`, pull requests
+- Node version SHALL be: 18.x
+- Dependency management SHALL use: npm with caching enabled
+- Current steps SHALL be: 
   1. Checkout code
   2. Setup Node.js with npm caching
   3. Install dependencies (`npm ci`)
@@ -29,10 +29,10 @@ The GitHub Actions workflow (`ci.yml`) cannot run successfully because the npm d
   6. Run Playwright tests
 
 **Issues**:
-1. GitHub Actions reports: "Dependencies lock file is not found in `/home/runner/work/demobank-ai/demobank-ai`. Supported file patterns: package-lock.json,npm-shrinkwrap.json,yarn.lock"
-2. File `package-lock.json` exists locally but is not tracked in git
-3. Workflow cannot use npm cache layer without lock file present
-4. CI/CD pipeline is blocked from execution
+1. GitHub Actions SHALL report: "Dependencies lock file is not found in `/home/runner/work/demobank-ai/demobank-ai`. Supported file patterns: package-lock.json,npm-shrinkwrap.json,yarn.lock"
+2. File `package-lock.json` SHALL exist locally but not be tracked in git
+3. Workflow SHALL not be able to use npm cache layer without lock file present
+4. CI/CD pipeline SHALL be blocked from execution
 
 ## Proposed Solution
 
