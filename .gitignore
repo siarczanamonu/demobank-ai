@@ -10,6 +10,7 @@ coverage/
 npm-debug.log
 /.npm
 auth.json
+tests/auth.json
 .github/chatmodes
 
 # Playwright
