@@ -1,3 +1,32 @@
+## 2026-01-08: Archive add-secure-ci-credentials
+
+**Change ID**: `add-secure-ci-credentials` → `openspec/changes/archive/2026-01-08-add-secure-ci-credentials/`
+
+**Summary**:
+Implemented secure credential management in GitHub Actions CI by storing test authentication credentials as GitHub Secrets. Credentials (DEMO_BANK_LOGIN=11111111, DEMO_BANK_PASSWORD=22222222) are now provisioned at runtime without exposing them in code or logs.
+
+**Key Changes**:
+- `.github/workflows/ci.yml`: Added step to generate `tests/auth.json` from GitHub Secrets
+- `.gitignore`: Added explicit `tests/auth.json` entry
+- `README.md`: Added "CI Credentials Setup (dla Maintainerów)" section with complete setup guide
+- `openspec/specs/ci-credentials/spec.md`: Published formal specification with 6 requirements
+
+**Security**:
+- Credentials masked in GitHub Actions logs (automatic)
+- Fork PRs do not have access to secrets
+- No code changes required to test suite
+- Backwards compatible with local development
+
+**Next Steps for Maintainers**:
+1. Create GitHub Secrets in repository settings:
+   - `DEMO_BANK_LOGIN` = `11111111`
+   - `DEMO_BANK_PASSWORD` = `22222222`
+2. Workflow will automatically use secrets on next push/PR
+
+**Reference**: See `README.md` "CI Credentials Setup" section for full instructions.
+
+---
+
 chore(ci/lint): add typecheck/lint, CI workflow and make tests more resilient
 
 Summary:
