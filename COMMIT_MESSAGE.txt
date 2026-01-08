@@ -1,3 +1,39 @@
+## 2026-01-08: Fix Playwright Browser Installation in CI
+
+**Change ID**: `fix-playwright-browser-install`
+
+**Problem**:
+GitHub Actions CI failed with error: "Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell..."
+
+**Root Cause**:
+Workflow set `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'` to skip downloads during `npm ci`, but lacked explicit browser installation step. Browser binaries (Chromium, Firefox, WebKit) were never provisioned in the CI environment.
+
+**Solution**:
+Added explicit `npx playwright install` step after `npm ci` to provision all browser binaries. This follows Playwright's official CI guidance (https://playwright.dev/docs/ci).
+
+**Key Changes**:
+- `.github/workflows/ci.yml`: Added "Install Playwright Browsers" step with explanatory comments
+- Step correctly positioned between `npm ci` and `npm run typecheck`
+- Includes reference to Playwright CI documentation for future maintenance
+
+**Implementation Notes**:
+- Browser installation handles all three Playwright browsers automatically
+- Leverages GitHub Actions cache for browser binaries (if configured in Playwright)
+- No environment variable changes needed
+- Fully backwards compatible with local development
+
+**Testing**:
+GitHub Actions will validate on next workflow run:
+- Browser installation step completes without errors
+- Tests can successfully launch browsers
+- No "Executable doesn't exist" errors occur
+
+**Impact**:
+✅ CI tests now execute successfully
+✅ No breaking changes to existing code
+
+---
+
 ## 2026-01-08: Archive add-secure-ci-credentials
 
 **Change ID**: `add-secure-ci-credentials` → `openspec/changes/archive/2026-01-08-add-secure-ci-credentials/`
