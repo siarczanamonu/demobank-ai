@@ -30,7 +30,7 @@ jobs:
       # GitHub Actions automatically masks secret values in logs (shows as [***])
       - name: Generate auth.json from GitHub Secrets
         run: |
-          echo '{"login":"${{ secrets.DEMO_BANK_LOGIN }}","password":"${{ secrets.DEMO_BANK_PASSWORD }}"}' > tests/auth.json
+          echo '{"login":"${{ secrets.DEMO_BANK_LOGIN }}","password":"${{ secrets.DEMO_BANK_PASSWORD }}"}' > auth.json
 
       - name: Install dependencies
         run: npm ci
