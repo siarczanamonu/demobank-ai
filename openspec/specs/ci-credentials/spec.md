@@ -11,12 +11,17 @@ Provide a machine-readable specification for securely provisioning CI credential
 ## Overview
 This specification defines how authentication credentials are securely provisioned to the Playwright test suite running in GitHub Actions CI environment. It ensures credentials (Demo Bank user: `11111111`, password: `22222222`) are available to tests while remaining inaccessible to unauthorized parties and unexposed in version control.
 
-## ADDED Requirements
+## Requirements
+
+This section collects the formal requirements for the `ci-credentials` capability. Refer to the ADDED Requirements below for concrete scenarios and acceptance criteria.
+
+
 
 ### Requirement: GitHub Secrets Configuration
-**ID**: `ci-credentials-req-001`
 
 The GitHub repository MUST define two encrypted secrets for authentication provisioning.
+
+**ID**: `ci-credentials-req-001`
 
 #### Scenario: Administrator creates GitHub Secrets
 **Given** a repository maintainer has admin access to repository settings  
@@ -32,9 +37,10 @@ And only repository collaborators SHALL see secret names (not values)
 ---
 
 ### Requirement: auth.json Runtime Generation
-**ID**: `ci-credentials-req-002`
 
 GitHub Actions workflow MUST generate `auth.json` from secrets before test execution.
+
+**ID**: `ci-credentials-req-002`
 
 #### Scenario: Workflow generates auth.json from secrets
 **Given** CI workflow runs on GitHub Actions  
@@ -55,9 +61,10 @@ And the file content SHALL never be logged or exposed
 ---
 
 ### Requirement: Secrets Unavailable to Untrusted Sources
-**ID**: `ci-credentials-req-003`
 
 GitHub Actions platform SHALL ensure credentials are not accessible to untrusted PR workflows or external triggers.
+
+**ID**: `ci-credentials-req-003`
 
 #### Scenario: Fork PR does not receive secrets
 **Given** a contributor creates a pull request from a forked repository  
@@ -69,9 +76,10 @@ And repository maintainers MAY manually approve workflows if needed (GitHub Acti
 ---
 
 ### Requirement: Backward Compatibility with Local Development
-**ID**: `ci-credentials-req-004`
 
 Local development workflow MUST continue functioning without changes to test code or configuration.
+
+**ID**: `ci-credentials-req-004`
 
 #### Scenario: Developer runs tests locally
 **Given** a developer has a local `tests/auth.json` file with credentials  
@@ -83,9 +91,10 @@ And local development workflow SHALL NOT be affected by CI changes
 ---
 
 ### Requirement: Credentials Not Persisted in Repository
-**ID**: `ci-credentials-req-005`
 
 Credentials MUST NOT ever be committed to version control history.
+
+**ID**: `ci-credentials-req-005`
 
 #### Scenario: Verify auth.json not in git
 **Given** workflow completes successfully  
@@ -98,9 +107,10 @@ And repository SHALL remain clean of sensitive data
 ---
 
 ### Requirement: Clear Documentation for Maintainers
-**ID**: `ci-credentials-req-006`
 
 Repository MUST include documentation for setting up GitHub Secrets.
+
+**ID**: `ci-credentials-req-006`
 
 #### Scenario: Maintainer follows setup guide
 **Given** a repository maintainer reads project documentation  
