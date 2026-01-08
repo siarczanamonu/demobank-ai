@@ -35,6 +35,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Install Playwright browsers (Chromium, Firefox, WebKit)
+      # This explicitly provisions browser binaries in CI environment
+      # Required because npm ci with PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD set skips browser downloads
+      # See: https://playwright.dev/docs/ci
+      - name: Install Playwright Browsers
+        run: npx playwright install
+
       - name: TypeScript typecheck
         run: npm run typecheck
 
