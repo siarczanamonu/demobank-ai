@@ -5,6 +5,9 @@
 **Last Updated**: 2026-01-08  
 **Status**: Proposed
 
+## Purpose
+Provide a machine-readable specification for securely provisioning CI credentials to the Playwright test suite using GitHub Actions secrets.
+
 ## Overview
 This specification defines how authentication credentials are securely provisioned to the Playwright test suite running in GitHub Actions CI environment. It ensures credentials (Demo Bank user: `11111111`, password: `22222222`) are available to tests while remaining inaccessible to unauthorized parties and unexposed in version control.
 
