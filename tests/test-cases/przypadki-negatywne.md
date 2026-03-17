@@ -1,8 +1,33 @@
-# Przypadki negatywne i krawędziowe
+Moduł: Przypadki Negatywne i Krawędziowe (Ogólne)
 
-Krótka lista przypadków do przetestowania:
-- Niepoprawny format numeru konta (znaki alfanumeryczne tam, gdzie powinien być numer).
-- Długi tekst w polu opisu (sprawdź limit długości i walidację).
-- Wielokrotne naciśnięcie przycisku "Przelej" (double submit) — ochrona przed duplikatem.
-- Próba wykonania akcji bez uprawnień (np. dostęp do sekcji administracyjnej).
-- Odłączenie sieci podczas wysyłania żądania — obsługa timeout/komunikat użytkownika.
+Założenia wstępne:
+- Użytkownik zalogowany (dla testów przelewów).
+
+NEG-TC-001: Niepoprawny format danych
+Kroki:
+1. Wpisz znaki alfanumeryczne w polu numeru konta.
+
+Oczekiwane rezultaty:
+- Blokada wpisywania lub walidacja błędu.
+
+NEG-TC-002: Długi opis (Max length)
+Kroki:
+1. Wpisz tekst > 200 znaków w tytule przelewu.
+
+Oczekiwane rezultaty:
+- Przycięcie tekstu lub komunikat o przekroczeniu limitu.
+
+NEG-TC-003: Double Submit
+Kroki:
+1. Kliknij wielokrotnie przycisk "Przelej" w krótkim odstępie czasu.
+
+Oczekiwane rezultaty:
+- Tylko jedna transakcja zrealizowana.
+
+NEG-TC-004: Odłączenie sieci
+Kroki:
+1. Rozłącz sieć podczas wysyłania przelewu.
+
+Oczekiwane rezultaty:
+- Czytelny komunikat "Błąd połączenia".
+- Brak wykonania transakcji "w ciemno".

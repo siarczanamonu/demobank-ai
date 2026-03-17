@@ -1,24 +1,54 @@
-# Logowanie
+Moduł: Logowanie użytkownika
 
-Założenia:
+Założenia wstępne:
 - Czysta sesja przeglądarki.
-- Aplikacja dostępna pod baseURL z `playwright.config.ts`.
-- Dane testowe: login `11111111`, hasło `22222222` (lub dowolne 8+ znaków).
+- Aplikacja pod baseURL.
+- Dane: login 11111111, hasło 22222222.
 
-Scenariusze:
+LOG-TC-001: Happy path
+Kroki:
+1. Otwórz stronę logowania (page.goto('/')).
+2. Wpisz login: 11111111.
+3. Wpisz hasło: 22222222.
+4. Kliknij "Zaloguj".
 
-1) Logowanie — happy path
-- Kroki: wpisz poprawny login i hasło (min. 8 znaków), kliknij "Zaloguj".
-- Oczekiwane: przekierowanie do dashboard, widoczne saldo i lista transakcji.
+Oczekiwane rezultaty:
+- Przekierowanie do /dashboard.
+- Widoczne: saldo i lista transakcji.
+- Status: PASS jeśli wszystkie elementy obecne.
 
-2) Logowanie — niepoprawne hasło (krótsze niż 8 znaków)
-- Kroki: wpisz poprawny login i hasło krótsze niż 8 znaków, kliknij "Zaloguj".
-- Oczekiwane: komunikat o błędzie "hasło ma min. 8 znaków". Note: Aplikacja akceptuje dowolne hasło o długości min. 8 znaków.
+LOG-TC-002: Hasło zbyt krótkie
+Kroki:
+1. Otwórz stronę logowania.
+2. Wpisz login: 11111111.
+3. Wpisz hasło: 1234567.
+4. Kliknij "Zaloguj".
 
-3) Walidacja pól (puste pola)
-- Kroki: pozostaw pole login/hasło puste, kliknij "Zaloguj".
-- Oczekiwane: brak reakcji lub brak komunikatu (obecna wersja demo nie wyświetla walidacji dla całkowicie pustych pól).
+Oczekiwane rezultaty:
+- Komunikat: "Hasło musi mieć min. 8 znaków".
+- Brak logowania.
 
-Wskazówki automatyzacyjne:
-- Używaj `await page.goto('/')` jeśli `baseURL` jest ustawiony.
-- Pobierz dane z `auth.json` lub z konfiguracji testu.
+LOG-TC-003: Puste pola
+Kroki:
+1. Otwórz stronę logowania.
+2. Pozostaw pola puste.
+3. Kliknij "Zaloguj".
+
+Oczekiwane rezultaty:
+- Brak komunikatu (zgodne z demo).
+
+LOG-TC-004: Edge case – białe znaki
+Kroki:
+- Jak TC-001, ale login/hasło z dodatkowymi spacjami.
+
+Oczekiwane rezultaty:
+- Trimowanie i sukces (weryfikacja).
+
+LOG-TC-005: Edge case – znaki specjalne
+Kroki:
+- Jak TC-001, hasło Pass@#$%12.
+
+Oczekiwane rezultaty:
+- Sukces logowania.
+
+Wskazówki: Pobierz dane z configu; dodaj assertions w Playwright.

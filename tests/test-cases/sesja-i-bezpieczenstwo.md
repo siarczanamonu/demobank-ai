@@ -1,11 +1,34 @@
-# Sesja i bezpieczeństwo
+Moduł: Sesja i bezpieczeństwo
 
-1) Wylogowanie i ochrona zasobów
-- Założenia: użytkownik zalogowany.
-- Kroki: zaloguj się, wyloguj, spróbuj wejść na dashboard (back / URL).
-- Oczekiwane: przekierowanie na login; dostęp do chronionych stron zablokowany.
+Założenia wstępne:
+- Użytkownik zalogowany.
 
-2) CSRF / manipulacja formularzem (basic)
-- Założenia: tester ma devtools.
-- Kroki: zmodyfikuj ukryte pola/tokeny przed wysłaniem formularza.
-- Oczekiwane: serwer odrzuca nieautoryzowane żądania; brak ujawnienia szczegółów wewnętrznych.
+SEC-TC-001: Wylogowanie i ochrona zasobów
+Kroki:
+1. Zaloguj się.
+2. Kliknij "Wyloguj".
+3. Spróbuj wrócić przyciskiem "Wstecz" lub wpisać URL dashboardu ręcznie.
+
+Oczekiwane rezultaty:
+- Przekierowanie na stronę logowania.
+- Dostęp pod bezpośrednim adresem zablokowany.
+
+SEC-TC-002: Manipulacja formularzem (CSRF basic)
+Kroki:
+1. Próba modyfikacji ukrytych pól/tokenów przez DevTools przed wysłaniem.
+
+Oczekiwane rezultaty:
+- Serwer odrzuca nieautoryzowane żądania.
+- Brak wycieku danych wewnętrznych.
+
+SEC-TC-003: Weryfikacja stanu po odświeżeniu (wylogowanie)
+Kroki:
+1. Zaloguj się.
+2. Kliknij "Wyloguj".
+3. Odśwież stronę.
+
+Oczekiwane rezultaty:
+- Użytkownik nadal jest wylogowany (widoczna strona logowania).
+- Brak dostępu do dashboardu bez ponownego logowania.
+
+Wskazówki: Testy wymagają weryfikacji po stronie backendu lub kontroli nagłówków.

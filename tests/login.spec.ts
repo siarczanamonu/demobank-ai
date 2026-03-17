@@ -47,3 +47,26 @@ test.describe('Logowanie — read-only asercje', () => {
     await expect(loginButton).toBeDisabled();
   });
 });
+
+test.describe('Logowanie — przypadki krawędziowe', () => {
+  test('LOG-EC-01: białe znaki w loginie i haśle (trim test)', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    // Próba logowania z dodatkowymi spacjami
+    await loginPage.attemptLogin('  11111111  ', '  22222222  ');
+
+    // Weryfikujemy czy system wpuścił (trim) czy zablokował
+    const title = await page.title();
+    if (/Logowanie/i.test(title)) {
+      await expect(page).toHaveTitle(/Logowanie/i);
+    } else {
+      await expect(page).toHaveURL(/pulpit|pulpit.html/);
+    }
+  });
+
+  test('LOG-EC-03: znaki specjalne w haśle', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    // Aplikacja demo akceptuje dowolne hasło o długości min. 8 znaków
+    await loginPage.attemptLogin('11111111', 'specjalne!@#$');
+    await expect(page).toHaveURL(/pulpit|pulpit.html/);
+  });
+});

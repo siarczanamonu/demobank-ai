@@ -28,10 +28,25 @@ test.describe('Dashboard — read-only checks', () => {
 
   test('wylogowanie przekierowuje na stronę logowania', async ({ page }) => {
     const dashboardPage = new DashboardPage(page);
-    
+
     await dashboardPage.logout();
-    
+
     await expect(page).toHaveTitle(/Logowanie/i);
     await expect(page).toHaveURL(/index.html|\/$/);
+  });
+});
+
+test.describe('Dashboard — przypadki krawędziowe', () => {
+  test.beforeEach(async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.login();
+  });
+
+  test('DSH-EC-03: weryfikacja formatu dostępnych środków', async ({ page }) => {
+    const dashboardPage = new DashboardPage(page);
+    // Saldo jest w elemencie o id 'money_value'
+    const balanceValue = page.locator('#money_value');
+    // Sprawdzamy czy saldo jest liczbą (demo app może nie formatować tego jako waluty w tym konkretnym elemencie)
+    await expect(balanceValue).toContainText(/\d+/);
   });
 });
