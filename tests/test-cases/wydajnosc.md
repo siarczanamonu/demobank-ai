@@ -4,6 +4,7 @@ Założenia wstępne:
 - Stabilne połączenie sieciowe.
 
 PERF-TC-001: Pomiar czasu ładowania
+Tagi: @performance @smoke
 Kroki:
 1. Otwórz stronę główną.
 2. Zaloguj się i zmierz czas do pełnego załadowania Dashboardu.

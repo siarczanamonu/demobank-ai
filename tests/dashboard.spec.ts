@@ -7,7 +7,7 @@ test.describe('Dashboard — read-only checks', () => {
     await loginPage.login();
   });
 
-  test('widoczność salda i ostatnich operacji', async ({ page }) => {
+  test('widoczność salda i ostatnich operacji @dashboard @smoke @happy', async ({ page }) => {
     const dashboardPage = new DashboardPage(page);
 
     // sprawdź że istnieje nagłówek 'konta osobiste' lub 'dostępne środki'
@@ -26,7 +26,7 @@ test.describe('Dashboard — read-only checks', () => {
     await expect(dashboardPage.getRecentOperationsTable()).toBeVisible();
   });
 
-  test('wylogowanie przekierowuje na stronę logowania', async ({ page }) => {
+  test('wylogowanie przekierowuje na stronę logowania @dashboard @smoke @happy', async ({ page }) => {
     const dashboardPage = new DashboardPage(page);
 
     await dashboardPage.logout();
@@ -42,7 +42,7 @@ test.describe('Dashboard — przypadki krawędziowe', () => {
     await loginPage.login();
   });
 
-  test('DSH-EC-03: weryfikacja formatu dostępnych środków', async ({ page }) => {
+  test('DSH-EC-03: weryfikacja formatu dostępnych środków @dashboard @happy @edge', async ({ page }) => {
     const dashboardPage = new DashboardPage(page);
     // Saldo jest w elemencie o id 'money_value'
     const balanceValue = page.locator('#money_value');

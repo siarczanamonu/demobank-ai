@@ -4,6 +4,7 @@ Założenia wstępne:
 - Aplikacja otwarta na różnych urządzeniach/viewportach.
 
 UI-TC-001: Kontrola responsywności
+Tagi: @ui @smoke
 Kroki:
 1. Otwórz aplikację w widoku Desktop (np. 1280x800).
 2. Zmień na Tablet (np. 768x1024).

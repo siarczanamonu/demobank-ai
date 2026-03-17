@@ -4,6 +4,7 @@ Założenia wstępne:
 - Użytkownik zalogowany.
 
 SEC-TC-001: Wylogowanie i ochrona zasobów
+Tagi: @security @smoke
 Kroki:
 1. Zaloguj się.
 2. Kliknij "Wyloguj".
@@ -14,6 +15,7 @@ Oczekiwane rezultaty:
 - Dostęp pod bezpośrednim adresem zablokowany.
 
 SEC-TC-002: Manipulacja formularzem (CSRF basic)
+Tagi: @security @edge
 Kroki:
 1. Próba modyfikacji ukrytych pól/tokenów przez DevTools przed wysłaniem.
 
@@ -22,6 +24,7 @@ Oczekiwane rezultaty:
 - Brak wycieku danych wewnętrznych.
 
 SEC-TC-003: Weryfikacja stanu po odświeżeniu (wylogowanie)
+Tagi: @security @smoke
 Kroki:
 1. Zaloguj się.
 2. Kliknij "Wyloguj".

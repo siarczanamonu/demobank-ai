@@ -4,6 +4,7 @@ Założenia wstępne:
 - Użytkownik zalogowany (dane z auth.json).
 
 DSH-TC-001: Weryfikacja salda i historii transakcji
+Tagi: @dashboard @smoke @happy
 Kroki:
 1. Zaloguj się.
 2. Sprawdź widoczność salda.
@@ -15,6 +16,7 @@ Oczekiwane rezultaty:
 - Uwaga: historia w demo jest statyczna.
 
 DSH-TC-002: Edge case – format waluty
+Tagi: @dashboard @happy @edge
 Kroki:
 1. Weryfikacja wyświetlania salda na dashboardzie.
 

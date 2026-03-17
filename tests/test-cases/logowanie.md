@@ -6,6 +6,7 @@ Założenia wstępne:
 - Dane: login 11111111, hasło 22222222.
 
 LOG-TC-001: Happy path
+Tagi: @login @smoke @happy
 Kroki:
 1. Otwórz stronę logowania (page.goto('/')).
 2. Wpisz login: 11111111.
@@ -18,6 +19,7 @@ Oczekiwane rezultaty:
 - Status: PASS jeśli wszystkie elementy obecne.
 
 LOG-TC-002: Hasło zbyt krótkie
+Tagi: @login @negative
 Kroki:
 1. Otwórz stronę logowania.
 2. Wpisz login: 11111111.
@@ -29,6 +31,7 @@ Oczekiwane rezultaty:
 - Brak logowania.
 
 LOG-TC-003: Puste pola
+Tagi: @login @negative
 Kroki:
 1. Otwórz stronę logowania.
 2. Pozostaw pola puste.
@@ -38,6 +41,7 @@ Oczekiwane rezultaty:
 - Brak komunikatu (zgodne z demo).
 
 LOG-TC-004: Edge case – białe znaki
+Tagi: @login @edge
 Kroki:
 - Jak TC-001, ale login/hasło z dodatkowymi spacjami.
 
@@ -45,6 +49,7 @@ Oczekiwane rezultaty:
 - Trimowanie i sukces (weryfikacja).
 
 LOG-TC-005: Edge case – znaki specjalne
+Tagi: @login @edge
 Kroki:
 - Jak TC-001, hasło Pass@#$%12.
 

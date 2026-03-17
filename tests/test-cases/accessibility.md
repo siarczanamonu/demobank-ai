@@ -4,6 +4,7 @@ Założenia wstępne:
 - Aplikacja otwarta na dowolnej stronie (np. logowanie).
 
 ACC-TC-001: Etykiety i atrybuty
+Tagi: @accessibility @ui
 Kroki:
 1. Sprawdź czy pola mają label lub aria-label.
 
@@ -12,6 +13,7 @@ Oczekiwane rezultaty:
 - (Obecnie w demo brak powiązań for/id).
 
 ACC-TC-002: Nawigacja klawiaturą
+Tagi: @accessibility @ui
 Kroki:
 1. Użyj klawiszy Tab/Enter aby przejść przez formularze.
 
