@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test';
 import { LoginPage, DashboardPage } from './pages';
 
 test.describe('Sesja i bezpieczeństwo', () => {
-  test('SEC-TC-003: Weryfikacja stanu po odświeżeniu (wylogowanie) @security @smoke', async ({ page }) => {
+  test('SEC-TC-003: Weryfikacja stanu po odświeżeniu (wylogowanie)', {
+    tag: ['@security', '@smoke'],
+  }, async ({ page }) => {
     const loginPage = new LoginPage(page);
     const dashboardPage = new DashboardPage(page);
 

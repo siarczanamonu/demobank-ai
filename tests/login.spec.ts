@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test';
 import { LoginPage, DashboardPage } from './pages';
 
 test.describe('Logowanie — read-only asercje', () => {
-  test('happy path: logowanie UI @login @smoke @happy', async ({ page }) => {
+  test('happy path: logowanie UI', {
+    tag: ['@login', '@smoke', '@happy'],
+  }, async ({ page }) => {
     const loginPage = new LoginPage(page);
     const dashboardPage = new DashboardPage(page);
 
@@ -13,7 +15,9 @@ test.describe('Logowanie — read-only asercje', () => {
     await expect(dashboardPage.getLogoutLink()).toBeVisible();
   });
 
-  test('niepoprawne hasło blokuje wejście @login @negative', async ({ page }) => {
+  test('niepoprawne hasło blokuje wejście', {
+    tag: ['@login', '@negative'],
+  }, async ({ page }) => {
     const loginPage = new LoginPage(page);
 
     await loginPage.attemptLogin(
@@ -39,7 +43,9 @@ test.describe('Logowanie — read-only asercje', () => {
     }
   });
 
-  test('puste pola: walidacja/disabled @login @negative', async ({ page }) => {
+  test('puste pola: walidacja/disabled', {
+    tag: ['@login', '@negative'],
+  }, async ({ page }) => {
     await page.goto('/');
 
     const loginButton = page.getByTestId('login-button');
@@ -49,7 +55,9 @@ test.describe('Logowanie — read-only asercje', () => {
 });
 
 test.describe('Logowanie — przypadki krawędziowe', () => {
-  test('LOG-EC-01: białe znaki w loginie i haśle (trim test) @login @edge', async ({ page }) => {
+  test('LOG-EC-01: białe znaki w loginie i haśle (trim test)', {
+    tag: ['@login', '@edge'],
+  }, async ({ page }) => {
     const loginPage = new LoginPage(page);
     // Próba logowania z dodatkowymi spacjami
     await loginPage.attemptLogin('  11111111  ', '  22222222  ');
@@ -63,7 +71,9 @@ test.describe('Logowanie — przypadki krawędziowe', () => {
     }
   });
 
-  test('LOG-EC-03: znaki specjalne w haśle @login @edge', async ({ page }) => {
+  test('LOG-EC-03: znaki specjalne w haśle', {
+    tag: ['@login', '@edge'],
+  }, async ({ page }) => {
     const loginPage = new LoginPage(page);
     // Aplikacja demo akceptuje dowolne hasło o długości min. 8 znaków
     await loginPage.attemptLogin('11111111', 'specjalne!@#$');

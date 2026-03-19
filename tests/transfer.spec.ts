@@ -11,7 +11,9 @@ test.describe('Szybki przelew — read-only checks', () => {
     await expect(page).toHaveURL(/quick_payment.html|quick_payment|pulpit.html/);
   });
 
-  test('formularz przelewu ma wymagane pola i przycisk aktywuje się po uzupełnieniu (nie wysyłamy przelewu) @transfer @smoke @happy', async ({ page }) => {
+  test('formularz przelewu ma wymagane pola i przycisk aktywuje się po uzupełnieniu (nie wysyłamy przelewu)', {
+    tag: ['@transfer', '@smoke', '@happy'],
+  }, async ({ page }) => {
     const transferPage = new TransferPage(page);
 
     // sprawdź że elementy są widoczne
@@ -32,14 +34,18 @@ test.describe('Szybki przelew — przypadki krawędziowe', () => {
     await page.getByRole('link', { name: /szybki przelew/i }).click();
   });
 
-  test('TRN-EC-01: minimalna kwota 0.01 @transfer @edge', async ({ page }) => {
+  test('TRN-EC-01: minimalna kwota 0.01', {
+    tag: ['@transfer', '@edge'],
+  }, async ({ page }) => {
     const transferPage = new TransferPage(page);
     await transferPage.fillTransferForm(1, '0.01', 'Test min');
     await transferPage.verifyExecuteButtonEnabled();
     // Nie klikamy execute, aby nie zmieniać stanu demo, jeśli to możliwe (test read-only-ish)
   });
 
-  test('TRN-EC-02/03: kwota zero lub ujemna @transfer @edge', async ({ page }) => {
+  test('TRN-EC-02/03: kwota zero lub ujemna', {
+    tag: ['@transfer', '@edge'],
+  }, async ({ page }) => {
     const transferPage = new TransferPage(page);
 
     // Kwota 0.00
@@ -55,7 +61,9 @@ test.describe('Szybki przelew — przypadki krawędziowe', () => {
     // UWAGA: demobank w obecnej wersji może nie blokować ujemnych kwot w UI.
   });
 
-  test('TRN-EC-06: XSS w tytule przelewu @transfer @security @edge', async ({ page }) => {
+  test('TRN-EC-06: XSS w tytule przelewu', {
+    tag: ['@transfer', '@security', '@edge'],
+  }, async ({ page }) => {
     const transferPage = new TransferPage(page);
     const xssPayload = "<script>alert('XSS')</script>";
     await transferPage.fillTransferForm(1, '1.00', xssPayload);
