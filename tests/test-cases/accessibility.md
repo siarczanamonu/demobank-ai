@@ -1,9 +1,24 @@
-# Accessibility — podstawowe testy
+Moduł: Accessibility (Dostępność)
 
-1) Etykiety i atrybuty
-- Kroki: sprawdź czy pola mają `label` lub `aria-label`.
-- Oczekiwane: pola opisane, czytelne etykiety (obecnie etykiety nie są technicznie powiązane z polami przez `for`/`id`).
+Założenia wstępne:
+- Aplikacja otwarta na dowolnej stronie (np. logowanie).
 
-2) Nawigacja klawiaturą
-- Kroki: użyj Tab/Enter aby przejść przez formularze.
-- Oczekiwane: elementy fokusowalne, widoczny focus state.
+ACC-TC-001: Etykiety i atrybuty
+Tagi: @accessibility @ui
+Kroki:
+1. Sprawdź czy pola mają label lub aria-label.
+
+Oczekiwane rezultaty:
+- Pola opisane, czytelne etykiety.
+- (Obecnie w demo brak powiązań for/id).
+
+ACC-TC-002: Nawigacja klawiaturą
+Tagi: @accessibility @ui
+Kroki:
+1. Użyj klawiszy Tab/Enter aby przejść przez formularze.
+
+Oczekiwane rezultaty:
+- Elementy fokusowalne.
+- Widoczny focus state.
+
+Status: DRAFT (wymaga pełnej weryfikacji WCAG).

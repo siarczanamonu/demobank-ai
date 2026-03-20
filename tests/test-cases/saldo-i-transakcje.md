@@ -1,11 +1,27 @@
-# Przegląd salda i transakcji
+Moduł: Przegląd salda i transakcji
 
-Założenia:
-- Użytkownik zalogowany (użyj danych z `auth.json`).
+Założenia wstępne:
+- Użytkownik zalogowany (dane z auth.json).
 
-Scenariusz: Weryfikacja salda i historii transakcji
-- Kroki: zaloguj się, sprawdź widoczność salda, otwórz listę transakcji.
-- Oczekiwane: saldo widoczne i sensowne (nie `NaN`/puste); lista transakcji załadowana (nagłówki/pozycje). Uwaga: w obecnej wersji demo lista "ostatnie operacje" oraz historia są statyczne i nie odświeżają się dynamicznie po nowym przelewie.
+DSH-TC-001: Weryfikacja salda i historii transakcji
+Tagi: @dashboard @smoke @happy
+Kroki:
+1. Zaloguj się.
+2. Sprawdź widoczność salda.
+3. Otwórz listę transakcji.
 
-Wskazówki:
-- Dla stabilności testów rozważ konto testowe z ustalonym saldem lub seed danych.
+Oczekiwane rezultaty:
+- Saldo widoczne i sensowne (nie NaN/puste).
+- Lista transakcji załadowana (nagłówki/pozycje).
+- Uwaga: historia w demo jest statyczna.
+
+DSH-TC-002: Edge case – format waluty
+Tagi: @dashboard @happy @edge
+Kroki:
+1. Weryfikacja wyświetlania salda na dashboardzie.
+
+Oczekiwane rezultaty:
+- Wartość numeryczna obecna (np. w #money_value).
+- Status: PASS jeśli liczba jest poprawnie wyświetlona.
+
+Wskazówki: Dla stabilności rozważ konto testowe z ustalonym saldem.

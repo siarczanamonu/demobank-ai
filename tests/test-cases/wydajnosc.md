@@ -1,6 +1,16 @@
-# Wydajność (smoke)
+Moduł: Wydajność (Smoke)
 
-Scenariusz: pomiar czasu ładowania
-- Założenia: stabilne łącze sieciowe.
-- Kroki: zmierz czas pełnego załadowania strony logowania i dashboard (devtools lub timer w Playwright).
-- Oczekiwane: logowanie <3s, dashboard <5s (wartości orientacyjne).
+Założenia wstępne:
+- Stabilne połączenie sieciowe.
+
+PERF-TC-001: Pomiar czasu ładowania
+Tagi: @performance @smoke
+Kroki:
+1. Otwórz stronę główną.
+2. Zaloguj się i zmierz czas do pełnego załadowania Dashboardu.
+
+Oczekiwane rezultaty:
+- ładowanie strony logowania < 3s.
+- ładowanie dashboardu < 5s.
+
+Status: INFORMACYJNY (wynik zależy od infrastruktury demo).
