@@ -11,7 +11,7 @@ export class TransferPage extends BasePage {
    * @returns Locator for recipient combobox
    */
   private getRecipientSelector(): Locator {
-    return this.page.getByRole('combobox');
+    return this.page.locator('#widget_1_transfer_receiver');
   }
 
   /**
@@ -19,7 +19,7 @@ export class TransferPage extends BasePage {
    * @returns Locator for execute button
    */
   private getExecuteButton(): Locator {
-    return this.page.getByRole('button', { name: /wykonaj|wykonaj/i });
+    return this.page.locator('#execute_btn');
   }
 
   /**
@@ -28,32 +28,7 @@ export class TransferPage extends BasePage {
    * @returns Locator for amount input field
    */
   private async getAmountInputField(): Promise<Locator> {
-    const search = 'kwota'.toLowerCase();
-
-    const makeXpath = (inner: string) =>
-      `xpath=(//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "${search}")])${inner}`;
-
-    // Strategy 1: input inside element containing text
-    const inputLocator = this.page.locator(makeXpath('//input')).first();
-    if ((await inputLocator.count()) > 0) return inputLocator;
-
-    // Strategy 2: textarea inside element containing text
-    const textareaLocator = this.page.locator(makeXpath('//textarea')).first();
-    if ((await textareaLocator.count()) > 0) return textareaLocator;
-
-    // Strategy 3: input following element containing text
-    const followingInput = this.page.locator(makeXpath('/following::input[1]')).first();
-    if ((await followingInput.count()) > 0) return followingInput;
-
-    // Strategy 4: select inside (fallback)
-    const selectLocator = this.page.locator(makeXpath('//select')).first();
-    if ((await selectLocator.count()) > 0) return selectLocator;
-
-    // Strategy 5: union fallback
-    const union = this.page.locator(
-      `xpath=(//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "${search}")])//input | (//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "${search}")])//textarea | (//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "${search}")])//select | (//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "${search}")])/following::input[1]`,
-    ).first();
-    return union;
+    return this.page.locator('#widget_1_transfer_amount');
   }
 
   /**
@@ -62,32 +37,7 @@ export class TransferPage extends BasePage {
    * @returns Locator for title input field
    */
   private async getTitleInputField(): Promise<Locator> {
-    const search = 'tytu'.toLowerCase();
-
-    const makeXpath = (inner: string) =>
-      `xpath=(//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "${search}")])${inner}`;
-
-    // Strategy 1: input inside
-    const inputLocator = this.page.locator(makeXpath('//input')).first();
-    if ((await inputLocator.count()) > 0) return inputLocator;
-
-    // Strategy 2: textarea inside
-    const textareaLocator = this.page.locator(makeXpath('//textarea')).first();
-    if ((await textareaLocator.count()) > 0) return textareaLocator;
-
-    // Strategy 3: input following
-    const followingInput = this.page.locator(makeXpath('/following::input[1]')).first();
-    if ((await followingInput.count()) > 0) return followingInput;
-
-    // Strategy 4: select fallback
-    const selectLocator = this.page.locator(makeXpath('//select')).first();
-    if ((await selectLocator.count()) > 0) return selectLocator;
-
-    // Strategy 5: union fallback
-    const union = this.page.locator(
-      `xpath=(//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "${search}")])//input | (//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "${search}")])//textarea | (//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "${search}")])//select | (//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "${search}")])/following::input[1]`,
-    ).first();
-    return union;
+    return this.page.locator('#widget_1_transfer_title');
   }
 
   /**
@@ -156,22 +106,7 @@ export class TransferPage extends BasePage {
    * @throws Error if field not found or fill fails
    */
   async fillAmount(amount: string): Promise<void> {
-    let amountInput = await this.getAmountInputField();
-
-    // Check if we got a select when we expected input, try fallback
-    const fieldType = await this.detectFieldType(amountInput);
-    if (fieldType === 'select') {
-      // Try fallback strategy for input
-      const fallback = this.page
-        .locator(
-          `xpath=(//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "kwota")])/following::input[1]`,
-        )
-        .first();
-      if ((await fallback.count()) > 0) {
-        amountInput = fallback;
-      }
-    }
-
+    const amountInput = await this.getAmountInputField();
     await this.waitForVisible(amountInput);
     await amountInput.fill(amount);
   }
@@ -182,22 +117,7 @@ export class TransferPage extends BasePage {
    * @throws Error if field not found or fill fails
    */
   async fillTitle(title: string): Promise<void> {
-    let titleInput = await this.getTitleInputField();
-
-    // Check if we got a select when we expected input, try fallback
-    const fieldType = await this.detectFieldType(titleInput);
-    if (fieldType === 'select') {
-      // Try fallback strategy for input
-      const fallback = this.page
-        .locator(
-          `xpath=(//*/descendant-or-self::*[contains(translate(normalize-space(string(.)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), "tytu")])/following::input[1]`,
-        )
-        .first();
-      if ((await fallback.count()) > 0) {
-        titleInput = fallback;
-      }
-    }
-
+    const titleInput = await this.getTitleInputField();
     await this.waitForVisible(titleInput);
     await titleInput.fill(title);
   }
